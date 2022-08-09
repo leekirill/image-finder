@@ -1,19 +1,22 @@
 import GalleryApiService from './src/js/apiService';
 import cardImage from './src/templates/cardImage';
+import * as basicLightbox from 'basiclightbox';
+
+import { onSuccess, onError } from './src/js/notifications';
 
 var debounce = require('lodash.debounce');
+
+const galleryApiService = new GalleryApiService();
 
 const refs = {
   inputEl: document.querySelector('input'),
   gallery: document.querySelector('.gallery'),
   loadMoreBtn: document.querySelector('.btn.btn-primary'),
-  divEl: document.querySelector('.photo-card'),
 };
 
-const galleryApiService = new GalleryApiService();
-
 refs.inputEl.addEventListener('input', debounce(onInput, 1000));
-refs.loadMoreBtn.addEventListener('click', fetchImages);
+refs.loadMoreBtn.addEventListener('click', loadMoreBtn);
+refs.gallery.addEventListener('click', onClickImage);
 
 function onInput(e) {
   refs.loadMoreBtn.classList.remove('is-hidden');
@@ -27,17 +30,16 @@ function onInput(e) {
 
 function fetchImages() {
   refs.loadMoreBtn.disabled = true;
-  galleryApiService.fetchImages().then(pics => {
-    markupImages(pics);
-    refs.loadMoreBtn.disabled = false;
-  });
+  galleryApiService
+    .fetchImages()
+    .then(pics => {
+      markupImages(pics);
 
-  setTimeout(() => {
-    refs.gallery.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-    });
-  }, 700);
+      refs.loadMoreBtn.disabled = false;
+    })
+    .catch(onError);
+
+  onSuccess();
 }
 
 function markupImages(markup) {
@@ -45,4 +47,21 @@ function markupImages(markup) {
 }
 function clearMarkup() {
   refs.gallery.innerHTML = '';
+}
+
+function loadMoreBtn() {
+  fetchImages();
+  setTimeout(() => {
+    refs.gallery.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+    onSuccess();
+  }, 800);
+}
+
+function onClickImage(e) {
+  if (e.target.nodeName === 'IMG') {
+    basicLightbox.create(`<img src="${e.target.src}" width="800" height="600">`).show();
+  }
 }
