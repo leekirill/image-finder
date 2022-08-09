@@ -1,5 +1,6 @@
 import GalleryApiService from './src/js/apiService';
 import cardImage from './src/templates/cardImage';
+import './src/js/infinite-scroll';
 import * as basicLightbox from 'basiclightbox';
 
 import { onSuccess, onError } from './src/js/notifications';
@@ -12,11 +13,12 @@ const refs = {
   inputEl: document.querySelector('input'),
   gallery: document.querySelector('.gallery'),
   loadMoreBtn: document.querySelector('.btn.btn-primary'),
+  observer: document.querySelector('.observer'),
 };
 
 refs.inputEl.addEventListener('input', debounce(onInput, 1000));
-refs.loadMoreBtn.addEventListener('click', loadMoreBtn);
 refs.gallery.addEventListener('click', onClickImage);
+// refs.loadMoreBtn.addEventListener('click', loadMoreBtn);
 
 function onInput(e) {
   refs.loadMoreBtn.classList.remove('is-hidden');
@@ -34,7 +36,7 @@ function fetchImages() {
     .fetchImages()
     .then(pics => {
       markupImages(pics);
-
+      console.log(pics);
       refs.loadMoreBtn.disabled = false;
     })
     .catch(onError);
@@ -49,19 +51,40 @@ function clearMarkup() {
   refs.gallery.innerHTML = '';
 }
 
-function loadMoreBtn() {
-  fetchImages();
-  setTimeout(() => {
-    refs.gallery.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-    });
-    onSuccess();
-  }, 1000);
-}
+// function loadMoreBtn() {
+//   fetchImages();
+//   setTimeout(() => {
+//     refs.gallery.scrollIntoView({
+//       behavior: 'smooth',
+//       block: 'end',
+//     });
+//     onSuccess();
+//   }, 1000);
+// }
+
+// pop-up image
 
 function onClickImage(e) {
   if (e.target.nodeName === 'IMG') {
     basicLightbox.create(`<img src="${e.target.src}" width="800" height="600">`).show();
   }
 }
+
+// infinite scroll
+
+const onEntry = entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && galleryApiService.query !== '') {
+      galleryApiService.fetchImages().then(pics => {
+        markupImages(pics);
+      });
+    }
+  });
+};
+
+const options = {
+  rootMargin: '200px',
+};
+
+const observer = new IntersectionObserver(onEntry, options);
+observer.observe(refs.observer);

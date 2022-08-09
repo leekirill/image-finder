@@ -14,17 +14,19 @@
     <title>image finder</title>
 </head>
 <body>
-
+    <header>
     <form class="search-form" id="search-form">
         <h2>Stunning free images</h2>
         <input type="text" name="query" autocomplete="off" placeholder="Search images..." />
     </form>
+    </header>
 
     <ul class="gallery">
         <!-- Список <li> с карточками изображений -->
 
     </ul>
     <button type="button" class="btn btn-primary is-hidden">Load more</button>
+    <div class="observer"></div>
 
     <script src="./node_modules/basiclightbox/dist/basicLightbox.min.js"></script>
     <script src="./app.js" type="module"></script>

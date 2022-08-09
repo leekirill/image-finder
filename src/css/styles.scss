@@ -9,9 +9,15 @@ h2 {
     padding: 0 0 10px 0;
     text-align: center;
 }
-
+header {
+    padding: 40px 0;
+    position: sticky;
+    top: -30px;
+    z-index: 1;
+    background: #fff;
+}
 form#search-form {
-    margin: 150px 0 70px;
+    
     input {
         display: block;
         margin-left: auto;
@@ -33,7 +39,7 @@ form#search-form {
 }
 button {
     left: 0
-}
+} 
 .btn.btn-primary {
     display: block;
     margin: 10px auto 100px auto;
@@ -80,7 +86,7 @@ button {
     gap: 20px;
     color: #ffffff;
     position: relative;
-    top: -60px;
+    top: -50px;
     left: 35px;
     overflow: hidden;
 
