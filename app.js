@@ -57,7 +57,7 @@ function loadMoreBtn() {
       block: 'end',
     });
     onSuccess();
-  }, 800);
+  }, 1000);
 }
 
 function onClickImage(e) {
