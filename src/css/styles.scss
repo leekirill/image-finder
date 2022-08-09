@@ -4,12 +4,18 @@
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+button {
+    position: relative;
+    z-index: 1;
+    left: 50%
+}
 form#search-form {
+    margin: 150px 0 70px;
     input {
-        position: absolute;
-        left: 50%;
-        top: 20%;
-        transform: translate(-50%, -50%);
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
         width: 350px;
         height: 40px;
         padding: 0 20px;
@@ -20,21 +26,24 @@ form#search-form {
 }
 
 .gallery {
-    height: 300px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 0 200px;
-    position: relative;
     top: 260px;
-    button {
-            display: block;
-            position: relative;
-            top: 0px;
-            left: 50%;
-            transform: translate(-50%, 0);
-        }
 }
+button {
+    left: 0
+}
+.btn.btn-primary {
+    display: block;
+    margin: 10px auto 100px auto;
+}
+
+.btn.btn-primary.is-hidden {
+    display: none;
+}
+
 
 .photo-card {
     width: calc(100%/3 - 20px);
