@@ -7,6 +7,7 @@ const refs = {
   inputEl: document.querySelector('input'),
   gallery: document.querySelector('.gallery'),
   loadMoreBtn: document.querySelector('.btn.btn-primary'),
+  divEl: document.querySelector('.photo-card'),
 };
 
 const galleryApiService = new GalleryApiService();
@@ -30,6 +31,13 @@ function fetchImages() {
     markupImages(pics);
     refs.loadMoreBtn.disabled = false;
   });
+
+  setTimeout(() => {
+    refs.gallery.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  }, 700);
 }
 
 function markupImages(markup) {
@@ -38,9 +46,3 @@ function markupImages(markup) {
 function clearMarkup() {
   refs.gallery.innerHTML = '';
 }
-
-// const element = document.getElementById('.my-element-selector');
-// element.scrollIntoView({
-//   behavior: 'smooth',
-//   block: 'end',
-// });
