@@ -1,0 +1,87 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  position: relative;
+  z-index: 1;
+  left: 50%;
+}
+
+form#search-form {
+  margin: 150px 0 70px;
+}
+form#search-form input {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+  height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 4px;
+  background: #ececec;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 200px;
+  top: 260px;
+}
+
+button {
+  left: 0;
+}
+
+.btn.btn-primary {
+  display: block;
+  margin: 10px auto 100px auto;
+}
+
+.btn.btn-primary.is-hidden {
+  display: none;
+}
+
+.photo-card {
+  width: calc(33.3333333333% - 20px);
+  transition: 250ms;
+}
+.photo-card:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+.photo-card img {
+  max-width: 100%;
+  border-radius: 4px;
+  transition: 250ms;
+}
+.photo-card img:before {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 100px;
+  background: #000;
+  overflow: hidden;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+  color: #ffffff;
+  position: relative;
+  top: -60px;
+  left: 35px;
+  overflow: hidden;
+}
+.stats-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/*# sourceMappingURL=/image-finder/styles.ca0f9209.css.map */

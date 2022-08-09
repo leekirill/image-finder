@@ -1,0 +1,14 @@
+form#search-form input {
+  width: 350px;
+  height: 40px;
+  background: #ececec;
+  border: none;
+  border-radius: 4px;
+  padding: 0 20px;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*# sourceMappingURL=index.a097447b.css.map */
