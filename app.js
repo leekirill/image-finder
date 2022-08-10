@@ -1,5 +1,7 @@
 import GalleryApiService from './src/js/apiService';
 import cardImage from './src/templates/cardImage';
+import refs from './src/js/refs';
+
 import './src/js/infinite-scroll';
 import * as basicLightbox from 'basiclightbox';
 
@@ -8,13 +10,6 @@ import { onSuccess, onError } from './src/js/notifications';
 var debounce = require('lodash.debounce');
 
 const galleryApiService = new GalleryApiService();
-
-const refs = {
-  inputEl: document.querySelector('input'),
-  gallery: document.querySelector('.gallery'),
-  // loadMoreBtn: document.querySelector('.btn.btn-primary'),
-  observer: document.querySelector('.observer'),
-};
 
 refs.inputEl.addEventListener('input', debounce(onInput, 1000));
 refs.gallery.addEventListener('click', onClickImage);
@@ -87,3 +82,20 @@ const options = {
 
 const observer = new IntersectionObserver(onEntry, options);
 observer.observe(refs.observer);
+
+const onScroll = e => {
+  e.forEach(e => {
+    if (!e.isIntersecting) {
+      refs.header.classList.add('alt');
+    } else {
+      refs.header.classList.remove('alt');
+    }
+  });
+};
+
+const scrollOptions = {
+  rootMargin: '100px',
+};
+
+const headerScroll = new IntersectionObserver(onScroll, scrollOptions);
+headerScroll.observe(refs.headerObserver);
