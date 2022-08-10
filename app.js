@@ -12,7 +12,7 @@ const galleryApiService = new GalleryApiService();
 const refs = {
   inputEl: document.querySelector('input'),
   gallery: document.querySelector('.gallery'),
-  loadMoreBtn: document.querySelector('.btn.btn-primary'),
+  // loadMoreBtn: document.querySelector('.btn.btn-primary'),
   observer: document.querySelector('.observer'),
 };
 
@@ -21,7 +21,7 @@ refs.gallery.addEventListener('click', onClickImage);
 // refs.loadMoreBtn.addEventListener('click', loadMoreBtn); // кнопка 'load-more'
 
 function onInput(e) {
-  refs.loadMoreBtn.classList.remove('is-hidden');
+  // refs.loadMoreBtn.classList.remove('is-hidden');
 
   galleryApiService.query = e.target.value;
   galleryApiService.resetPage();
@@ -31,13 +31,12 @@ function onInput(e) {
 }
 
 function fetchImages() {
-  refs.loadMoreBtn.disabled = true;
+  // refs.loadMoreBtn.disabled = true;
   galleryApiService
     .fetchImages()
     .then(pics => {
       markupImages(pics);
-      console.log(pics);
-      refs.loadMoreBtn.disabled = false;
+      // refs.loadMoreBtn.disabled = false;
     })
     .catch(onError);
 
