@@ -18,7 +18,7 @@ const refs = {
 
 refs.inputEl.addEventListener('input', debounce(onInput, 1000));
 refs.gallery.addEventListener('click', onClickImage);
-// refs.loadMoreBtn.addEventListener('click', loadMoreBtn);
+// refs.loadMoreBtn.addEventListener('click', loadMoreBtn); // кнопка 'load-more'
 
 function onInput(e) {
   refs.loadMoreBtn.classList.remove('is-hidden');
