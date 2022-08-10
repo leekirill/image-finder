@@ -29,6 +29,10 @@ form#search-form {
         padding: 0 20px;
         border: 1px solid #a7a7a7;
         border-radius: 4px;
+        &:focus-visible {
+            outline: none;
+            border: 1px solid #cfcfcf;
+        }
     }
 }
 
