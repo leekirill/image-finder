@@ -25,17 +25,26 @@ function onInput(e) {
   clearMarkup();
 }
 
-function fetchImages() {
-  // refs.loadMoreBtn.disabled = true;
-  galleryApiService
-    .fetchImages()
-    .then(pics => {
-      markupImages(pics);
-      // refs.loadMoreBtn.disabled = false;
-    })
-    .catch(onError);
+// function fetchImages() {
+//   // refs.loadMoreBtn.disabled = true;
+//   galleryApiService.fetchImages()
+//     .then(pics => {
+//       markupImages(pics);
+//       // refs.loadMoreBtn.disabled = false;
+//     })
+//     .catch(onError);
 
-  onSuccess();
+//   onSuccess();
+// }
+
+async function fetchImages() {
+  try {
+    const fetchImages = await galleryApiService.fetchImages();
+    await markupImages(fetchImages);
+    onSuccess();
+  } catch {
+    onError();
+  }
 }
 
 function markupImages(markup) {
@@ -64,11 +73,12 @@ function onClickImage(e) {
   }
 }
 
-// infinite scroll
+// infinite scroll IO
 
 const onEntry = entries => {
   entries.forEach(e => {
     if (e.isIntersecting && galleryApiService.query !== '') {
+      galleryApiService.incrementPage();
       galleryApiService.fetchImages().then(pics => {
         markupImages(pics);
       });
@@ -82,6 +92,8 @@ const options = {
 
 const observer = new IntersectionObserver(onEntry, options);
 observer.observe(refs.observer);
+
+// header IO
 
 const onScroll = e => {
   e.forEach(e => {
